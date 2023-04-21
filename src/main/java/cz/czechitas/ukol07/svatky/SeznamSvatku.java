@@ -8,26 +8,6 @@ public class SeznamSvatku {
 
     Svatek svatek = new Svatek();
 
-    String jmenoSvatku = svatek.getJmeno();
-    MonthDay denSvatku = svatek.getDen();
-
-    public String getJmenoSvatku() {
-        return jmenoSvatku;
-    }
-
-    public void setJmenoSvatku(String jmenoSvatku) {
-        this.jmenoSvatku = jmenoSvatku;
-    }
-
-    public MonthDay getDenSvatku() {
-        return denSvatku;
-    }
-
-    public void setDenSvatku(MonthDay denSvatku) {
-        this.denSvatku = denSvatku;
-    }
-
-
 
     public List<Svatek> getSvatky() {
         return svatky;
