@@ -6,8 +6,10 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.MonthDay;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class SvatkySluzba {
 
@@ -18,10 +20,12 @@ public class SvatkySluzba {
     private final SeznamSvatku seznamSvatku;
 
     public SvatkySluzba() throws IOException {
+        seznamSvatku  = objectMapper.readValue(cestaKDatum.toFile(), SeznamSvatku.class);
+
         // TODO načíst seznam svátků ze souboru svatky.json
 
         // Následující řádek po vlastní implementaci smažete.
-        seznamSvatku = null;
+       // seznamSvatku = null;
     }
 
     public List<String> vyhledatSvatkyDnes() {
@@ -29,7 +33,13 @@ public class SvatkySluzba {
     }
 
     public List<String> vyhledatSvatkyKeDni(MonthDay day) {
-        // TODO
+        Stream.of(getSeznamSvatku())
+                .filter(seznamSvatku -> seznamSvatku.getDenSvatku().equals(day))
+                .map(seznamSvatku -> seznamSvatku.getJmenoSvatku())
+                .toList();
+       return List.of();
+
+
         // získat seznam svátků
         // převést na Stream
         // pomocí metody filter() vybrat jen ty, které odpovídají zadanému dni (porovnat MonthDay pomocí metodyequals())
@@ -37,6 +47,10 @@ public class SvatkySluzba {
         // pomocí toList() převést na List
 
         // Následující řádek po vlastní implementaci smažete.
-        return List.of();
+       // return List.of();
+    }
+
+    public SeznamSvatku getSeznamSvatku() {
+        return seznamSvatku;
     }
 }
